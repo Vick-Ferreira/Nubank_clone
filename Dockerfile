@@ -14,7 +14,7 @@ COPY Backend ./Backend
 COPY Frontend ./Frontend
 
 # Expõe a porta 3000 (se necessário)
-EXPOSE 3000
+EXPOSE 8080
 
 # Comando de inicialização
 CMD ["npm", "start"]
