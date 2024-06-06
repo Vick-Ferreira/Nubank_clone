@@ -9,7 +9,7 @@ COPY package*.json ./
 # Instala as dependências do backend
 RUN npm install
 
-# Copia os diretórios Backend e Frontend
+# Copia os diretórios Backend e Frontendd
 COPY Backend ./Backend
 COPY Frontend ./Frontend
 
