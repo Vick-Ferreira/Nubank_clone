@@ -13,6 +13,10 @@ RUN npm install
 COPY Backend ./Backend
 COPY Frontend ./Frontend
 
+# Instala as dependências do Backend e do Frontend
+RUN cd Backend && npm install
+RUN cd Frontend && npm install
+
 # Expõe a porta 3000 (se necessário)
 EXPOSE 8080
 
