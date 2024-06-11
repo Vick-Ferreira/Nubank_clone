@@ -1,68 +1,56 @@
-//config servidor 
-const express = require('express'); //recuperando do pacote
-const app = express(); //atribuindo na const app o que recuperou do pacote
+const express = require('express');
+const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const path = require('path');
 
+const port = process.env.PORT || 8080;
 
-const port = process.env.PORT || 8080
+// Verificar e exibir a URI do MongoDB
+if (!process.env.MONGODB_URI) {
+    console.error('Erro: MONGODB_URI não está definida no arquivo .env');
+    process.exit(1);
+}
+
+console.log('MONGODB_URI:', process.env.MONGODB_URI);
 
 app.use(express.json());
 app.use(cors());
 
-//rotas para router
-app.get('/carroselCards', (req, res) => {
-   const path = require('path'); // Importar o módulo path
-   const data = require(path.join(__dirname, 'db.json')); // Caminho relativo ao diretório atual
-   res.json(data.carroselCards);
-});
-app.get('/duplacard', (req, res) => {
-   const path = require('path'); // Importar o módulo path
-   const data = require(path.join(__dirname, 'db.json')); // Caminho relativo ao diretório atual
-   res.json(data.duplacard);
-});
-app.get('/backgroud', (req, res) => {
-   const path = require('path'); // Importar o módulo path
-   const data = require(path.join(__dirname, 'db.json')); // Caminho relativo ao diretório atual
-   res.json(data.backgroud);
-});
-app.get('/unico', (req, res) => {
-   const path = require('path'); // Importar o módulo path
-   const data = require(path.join(__dirname, 'db.json')); // Caminho relativo ao diretório atual
-   res.json(data.unico);
-});
-app.get('/elementosCards', (req, res) => {
-   const path = require('path'); // Importar o módulo path
-   const data = require(path.join(__dirname, 'db.json')); // Caminho relativo ao diretório atual
-   res.json(data.elementosCards);
-});
-app.get('/cardCards', (req, res) => {
-   const path = require('path'); // Importar o módulo path
-   const data = require(path.join(__dirname, 'db.json')); // Caminho relativo ao diretório atual
-   res.json(data.cardCards);
-});
+// Importar e usar as rotas
+const carroselCardsRouter = require('./routes/carroselCardsRoutes');
+app.use(carroselCardsRouter);
 
+const elementosCardsRouter = require('./routes/elementosCardsRoutes');
+app.use(elementosCardsRouter);
 
+const cardCardsRouter = require('./routes/cardCardsRoutes');
+app.use(cardCardsRouter);
 
-//servir arquivos estáticos
-const frontendPath = path.join(__dirname, '../Frontend') //pasta em que está os arquivos estáticos
+const duploCardsRouter = require('./routes/duploCardRoutes');
+app.use(duploCardsRouter);
+
+const blocoCardRouter = require('./routes/blocoCardRoutes');
+app.use(blocoCardRouter);
+
+const backgroudCardRouter = require('./routes/backgroundCardRoutes');
+app.use(backgroudCardRouter);
+
+// Servir arquivos estáticos
+const frontendPath = path.join(__dirname, '../Frontend');
 app.use(express.static(frontendPath));
 
+// Conectar com MongoDB
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log('Conectado ao MongoDB');
+    })
+    .catch((error) => {
+        console.error('Erro ao conectar ao MongoDB', error);
+    });
 
-
-//conectar com mongodb
-mongoose.connect(process.env.MONGODB_URI)
-   .then(() => {
-      console.log('Conectado ao mongoDB');
-   })
-   .catch((error) => {
-      console.error('Erro ao conectar ao mongoDB', error);
-   });
-
-
-// inicialização do servidor 
+// Inicialização do servidor
 app.listen(port, () => {
-   console.log(`Servidor está rodando na porta : ${port}`)
+    console.log(`Servidor está rodando na porta: ${port}`);
 });

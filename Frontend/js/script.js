@@ -55,89 +55,89 @@ window.addEventListener("scroll", toggleScrollButton);
 
 
 // Solicitação fetch para carroselCards
-fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/carroselCards')
+fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/carrosel')
     .then((resp) => resp.json())
     .then((data) => {
-        const carroselCards = data.carroselCards;
-
-      
         function renderizarCarrosselCards() {
             const containerCarrosselCards = $('#carrosselCards'); 
             data.forEach((item) => {
                 const card = document.createElement('div');
                 card.className = 'card';
 
-                const icone = document.createElement('i');
-                icone.className = 'iconeCarrosel ' + item.icone;
-                icone.innerHTML = '';
+                // Criar elemento de imagem
+                const img = document.createElement('img');
+                img.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/carrosel/${item.filename}`; // URL para recuperar a imagem
+                img.alt = item.filename; // Usando o título como texto alternativo da imagem
+                img.className = 'iconeCarrosel';
 
                 const titulo = document.createElement('h5');
-                titulo.textContent = item.titulo;
+                titulo.textContent = item.metadata.titulo;
                 titulo.className = 'titulo-min';
 
                 const descricao = document.createElement('p');
-                descricao.textContent = item.conteudo;
+                descricao.textContent = item.metadata.conteudo;
                 descricao.className = 'conteudo';
 
                 const link = document.createElement('a');
-                link.href = item.link;
+                link.href = item.metadata.link;
                 link.textContent = 'Saiba mais';
                 link.className = 'link-min';
 
-                card.appendChild(icone);
+                card.appendChild(img); // Adicionar a imagem ao cartão
                 card.appendChild(titulo);
                 card.appendChild(descricao);
                 card.appendChild(link);
 
-                // Addicionando  cartão ao carrossel
+                // Adicionando cartão ao carrossel
                 containerCarrosselCards.append(card);
             });
-  // Inicializando o Slick Carousel após adicionar os cartões
-  containerCarrosselCards.slick({
-    infinite: true, // carrossel infinito
-    slidesToShow: 3, // Número de cartões visíveis por padrão
-    prevArrow: '#slick-prev',
-    nextArrow: '#slick-next',
-    responsive: [ //condições para as medias
-    {
-      breakpoint: 2600,
-      settings: {
-        slidesToShow: 5.5  // Número de slides a serem mostrados a partir de 1600
-      }
-    },
-    {
-      breakpoint: 1600,
-      settings: {
-        slidesToShow: 4.5
-      }
-    },
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 2.8
-      }
-    },
-      {
-        breakpoint: 800,
-        settings: {
-          slidesToShow: 2.1
+
+            // Inicializando o Slick Carousel após adicionar os cartões
+            containerCarrosselCards.slick({
+                infinite: true, // carrossel infinito
+                slidesToShow: 3, // Número de cartões visíveis por padrão
+                prevArrow: '#slick-prev',
+                nextArrow: '#slick-next',
+                responsive: [ //condições para as medias
+                {
+                    breakpoint: 2600,
+                    settings: {
+                        slidesToShow: 5.5  // Número de slides a serem mostrados a partir de 1600
+                    }
+                },
+                {
+                    breakpoint: 1600,
+                    settings: {
+                        slidesToShow: 4.5
+                    }
+                },
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 2.8
+                    }
+                },
+                {
+                    breakpoint: 800,
+                    settings: {
+                        slidesToShow: 2.1
+                    }
+                },
+                {
+                    breakpoint: 600,// Quando a largura da tela for igual ou inferior 
+                    settings: {
+                        slidesToShow: 1.5
+                    }
+                },
+                {
+                    breakpoint: 400,// Quando a largura da tela for igual ou inferior a 
+                    settings: {
+                        slidesToShow: .8
+                    }
+                }
+                ]
+            });
         }
-      },
-      {
-        breakpoint: 600,// Quando a largura da tela for igual ou inferior 
-        settings: {
-          slidesToShow: 1.5
-        }
-      },
-      {
-        breakpoint: 400,// Quando a largura da tela for igual ou inferior a 
-        settings: {
-          slidesToShow: .8
-        }
-      }
-    ]
-  });
-}
         //  função para renderizar os cartões
         renderizarCarrosselCards();
     })
@@ -150,18 +150,12 @@ fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/carroselCards')
 
 
 
-
 //solicitação fetch para dupla de cards
-fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/duplacard')
+fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/duploCards')
   .then((resp) => resp.json())
   .then((data) => {
-    const duplacard = data.duplacard; //buscando arquivo especifico dentro da pasta local
-
-    //criando cards
-
     function renderizarDuplaCard() {
       const duplacardContainer = document.getElementById('duplacard');
-
       //fazendo algo com cada item
       data.forEach((item, index) => {
         const containerCar = document.createElement('div');
@@ -178,14 +172,15 @@ fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/duplacard')
         }
 
         const imgDu = document.createElement('img');
-        imgDu.src = item.img;
+        imgDu.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/duploCards/${item.filename}`; // URL para recuperar a imagem
+        imgDu.alt = item.filename;
         imgDu.className = 'imgDu';
 
         const containerConteudo = document.createElement('div');
         containerConteudo.className = 'carConteudo';
 
         const tituloDu = document.createElement('h1');
-        tituloDu.textContent = item.titulo;
+        tituloDu.textContent = item.metadata.titulo;
         tituloDu.className = 'tituloDu';
 
         if (index === 0 ){
@@ -193,11 +188,11 @@ fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/duplacard')
         }
 
         const conDu = document.createElement('p');
-        conDu.textContent = item.conteudo;
+        conDu.textContent = item.metadata.conteudo;
         conDu.className = 'conDu';
 
         const link = document.createElement('a');
-        link.href = item.link;
+        link.href = item.metadata.link;
         link.textContent = 'Saiba mais';
 
         // Crie um elemento <i> para o ícone
@@ -240,168 +235,173 @@ fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/duplacard')
   });
 
 
+
+
+
+
+
   //solicitação fetch para backgroud
-fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/backgroud')
-.then((resp) => resp.json())
-.then((data) => {
-  const backgroud = data.backgroud;
-
-  //criando cards
-
-  function renderizarBackgroud() {
-    const backgroudContainer = document.getElementById('backgroud');
-  
-    // Crie um conteiner para os cards com índices 1 e 2
-    const flexContainer = document.createElement('div');
-    flexContainer.className = 'flex-container';
-  
-    // Crie um container para o card com índice 3
-    const card3Container = document.createElement('div');
-    // Não atribua a classe 'carDu' ao container do índice 3
-  
-    //fazendo algo com cada item
-    data.forEach((item, index) => {
-      const containerCar = document.createElement('div');
-      containerCar.className = 'car';
-  
-      if (index === 1) {
-        containerCar.style.backgroundColor = '#820AD1';
-        containerCar.style.color = '#f5f5f5';
-        containerCar.classList.add('largurapersonalizadaCard');
-      } else if (index === 2) {
-        containerCar.style.backgroundColor = '#2F0549';
-        containerCar.style.color = '#f5f5f5';
-        containerCar.classList.add('largurapersonalizadaCard');
-      } else if (index === 0 ) {
-        containerCar.style.backgroundColor = '#f5f5f5';
-        containerCar.classList.add('index-0');
-      }else if( index === 3){
-        containerCar.style.backgroundColor = '#f5f5f5';
-      }
-      
-      const imgBg = document.createElement('img');
-      imgBg.src = item.img;
-      
-      if (index === 1 || index === 2) {
-        imgBg.classList.add('personalizadaImgBg');
-      } else {
-        imgBg.className = 'imgBg';
-      }
-   
-    
-      const containerConteudo = document.createElement('div');
-      containerConteudo.className = 'carConteudo';
-      const screenWidth = window.innerWidth;
-if (index === 1 || index === 2) {
-  if (screenWidth === 1100) {
-    containerConteudo.style.marginRight = '15em';
-  } else {
-    containerConteudo.classList.add('personalizadoconCarconteudo');
-  }
-} else {
-  containerConteudo.className = 'conDu';
-}
-  
-      const tituloDu = document.createElement('h1');
-      tituloDu.textContent = item.titulo;
-      tituloDu.className = 'tituloDu';
-  
-      if (index === 0 || index === 3) {
-        tituloDu.style.color = '#820AD1';
-      }
-  
-      const conDu = document.createElement('p');
-      conDu.textContent = item.conteudo;
-      conDu.className = 'conDu';
-
-  
-      const link = document.createElement('a');
-      link.href = item.link;
-      link.textContent = 'Saiba mais';
-      link.className = 'linkDu';
-  
-      const icone = document.createElement('i');
-      icone.innerHTML = '<i class="bi bi-arrow-right"></i>';
-  
-      if (index === 1 || index === 2) {
-        icone.className = 'iconeDu_branco';
-        link.className = 'linkDu_branco';
-      } else {
-        icone.className = 'icone';
-        link.className = 'linkDu';
-      }
-  
-      containerCar.appendChild(imgBg);
-      containerCar.appendChild(containerConteudo);
-      containerConteudo.appendChild(tituloDu);
-      containerConteudo.appendChild(conDu);
-      containerConteudo.appendChild(link);
-      containerConteudo.appendChild(icone);
-  
-      if (index === 1 || index === 2) {
-        //  cards  índices 1 e 2 sendo add ao flexContainer
-        flexContainer.appendChild(containerCar);
-      } else {
-        if (index === 0) {
-          // card com índice 0 add diretamente ao backgroudContainer
-          backgroudContainer.appendChild(containerCar);
-        } else if (index === 3) {
-          // card com índice 3 ao card3Container
-          card3Container.appendChild(containerCar);
-        }
-      }
-    });
-  
-    // Add flexContainer ao backgroudContainer após o loop
-    backgroudContainer.appendChild(flexContainer);
-    // Add o card3Container abaixo do flexContainer
-    backgroudContainer.appendChild(card3Container);
-  }
-
-  // função para renderizar os cartões
-  renderizarBackgroud();
-})
-.catch((error) => {
-  console.error('Erro durante a requisição:', error);
-});
-
-
-
-
-
-  //solicitação fetch para dupla de cards
-fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/unico')
+  fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/backgroud')
   .then((resp) => resp.json())
   .then((data) => {
-    const unico = data.unico;
+    console.log('Dados recebidos:', data); // Verifique os dados recebidos
+    const backgroud = data.backgroud;
 
-    //criando cards
+    function renderizarBackgroud() {
+      const backgroudContainer = document.getElementById('backgroud');
+      if (!backgroudContainer) {
+        console.error('Elemento com id="backgroud" não encontrado.');
+        return;
+      }
 
+      // Crie um contêiner para os cards com índices 1 e 2
+      const flexContainer = document.createElement('div');
+      flexContainer.className = 'flex-container';
+
+      // Crie um container para o card com índice 3
+      const card3Container = document.createElement('div');
+
+      // Fazendo algo com cada item
+      data.forEach((item, index) => {
+        console.log('Renderizando item:', item, 'Index:', index); // Depuração de cada item
+        const containerCar = document.createElement('div');
+        containerCar.className = 'car';
+
+        if (index === 1) {
+          containerCar.style.backgroundColor = '#820AD1';
+          containerCar.style.color = '#f5f5f5';
+          containerCar.classList.add('largurapersonalizadaCard');
+        } else if (index === 2) {
+          containerCar.style.backgroundColor = '#2F0549';
+          containerCar.style.color = '#f5f5f5';
+          containerCar.classList.add('largurapersonalizadaCard');
+        } else if (index === 0) {
+          containerCar.style.backgroundColor = '#f5f5f5';
+          containerCar.classList.add('index-0');
+        } else if (index === 3) {
+          containerCar.style.backgroundColor = '#f5f5f5';
+        }
+
+        const imgBg = document.createElement('img');
+        imgBg.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/backgroud/${item.filename}`;
+        imgBg.alt = item.filename;
+
+        if (index === 1 || index === 2) {
+          imgBg.classList.add('personalizadaImgBg');
+        } else {
+          imgBg.className = 'imgBg';
+        }
+
+        const containerConteudo = document.createElement('div');
+        containerConteudo.className = 'carConteudo';
+
+        const screenWidth = window.innerWidth;
+        if (index === 1 || index === 2) {
+          if (screenWidth === 1100) {
+            containerConteudo.style.marginRight = '15em';
+          } else {
+            containerConteudo.classList.add('personalizadoconCarconteudo');
+          }
+        } else {
+          containerConteudo.className = 'conDu';
+        }
+
+        const tituloDu = document.createElement('h1');
+        tituloDu.textContent = item.metadata.titulo;
+        tituloDu.className = 'tituloDu';
+
+        if (index === 0 || index === 3) {
+          tituloDu.style.color = '#820AD1';
+        }
+
+        const conDu = document.createElement('p');
+        conDu.textContent = item.metadata.conteudo;
+        conDu.className = 'conDu';
+
+        const link = document.createElement('a');
+        link.href = item.metadata.link;
+        link.textContent = 'Saiba mais';
+        link.className = 'linkDu';
+
+        const icone = document.createElement('i');
+        icone.innerHTML = '<i class="bi bi-arrow-right"></i>';
+
+        if (index === 1 || index === 2) {
+          icone.className = 'iconeDu_branco';
+          link.className = 'linkDu_branco';
+        } else {
+          icone.className = 'icone';
+          link.className = 'linkDu';
+        }
+
+        containerCar.appendChild(imgBg);
+        containerCar.appendChild(containerConteudo);
+        containerConteudo.appendChild(tituloDu);
+        containerConteudo.appendChild(conDu);
+        containerConteudo.appendChild(link);
+        containerConteudo.appendChild(icone);
+
+        if (index === 1 || index === 2) {
+          //  cards  índices 1 e 2 sendo add ao flexContainer
+          flexContainer.appendChild(containerCar);
+        } else {
+          if (index === 0) {
+            // card com índice 0 add diretamente ao backgroudContainer
+            backgroudContainer.appendChild(containerCar);
+          } else if (index === 3) {
+            // card com índice 3 ao card3Container
+            card3Container.appendChild(containerCar);
+          }
+        }
+      });
+
+      // Add flexContainer ao backgroudContainer após o loop
+      backgroudContainer.appendChild(flexContainer);
+      // Add o card3Container abaixo do flexContainer
+      backgroudContainer.appendChild(card3Container);
+    }
+
+    // função para renderizar os cartões
+    renderizarBackgroud();
+  })
+  .catch((error) => {
+    console.error('Erro durante a requisição:', error);
+  });
+
+
+
+
+
+
+
+ 
+  fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/bloco')
+  .then((resp) => resp.json())
+  .then((data) => {
     function renderizarUnico() {
-      const unicoContainer = document.getElementById('unico');
+      const unicoContainer = document.getElementById('bloco');
 
       //fazendo algo com cada item
-      data.forEach((item, index) => {
+      data.forEach((item) => {
         const unicoCar = document.createElement('div');
         unicoCar.className = 'carUnico';
 
-      // Crie um elemento <i> para o ícone
-      const icone = document.createElement('i');
-      icone.className = 'iconeUnico' + item.icone;
-      icone.innerHTML = '';
+        const imgDu = document.createElement('img');
+        imgDu.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/bloco/${item.filename}`; // URL para recuperar a imagem
+        imgDu.alt = item.filename;
 
         const subtituloUnico = document.createElement('h3');
-        subtituloUnico.textContent = item.subtitulo;
+        subtituloUnico.textContent = item.metadata.subtitulo;
         subtituloUnico.className = 'subtituloUnico';
       
 
         const paragrafoUnico = document.createElement('p');
-        paragrafoUnico.textContent = item.paragrafo;
+        paragrafoUnico.textContent = item.metadata.paragrafo;
         paragrafoUnico.className = 'paragrafoUnico';
 
 
-     
-        unicoCar.appendChild(icone);
+        // Correção aqui: usar imgDu ao invés de img
+        unicoCar.appendChild(imgDu);
         unicoCar.appendChild(subtituloUnico);
         unicoCar.appendChild(paragrafoUnico);
  
@@ -416,13 +416,13 @@ fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/unico')
   .catch((error) => {
     console.error('Erro durante a requisição:', error);
   });
-  
-  
 
 
 
-//solicitação fetch para elementosCards  (Primeiro grupo de cards com rolagem horizontas (setas teclado))
-fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/elementosCards')
+
+
+
+  fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/elementos')
   .then((resp) => resp.json())
   .then((data) => {
     const elementosCards = data.elementosCards;
@@ -445,19 +445,20 @@ fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/elementosCards')
         cartao.className = 'cartao';
 
         const imagem = document.createElement('img');
-        imagem.src = item.img;
+        imagem.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/elementos/${item.filename}`; // URL para recuperar a imagem
+        imagem.alt = item.filename;
         imagem.className = 'img';
 
         const titulo = document.createElement('h2');
-        titulo.textContent = item.titulo;
+        titulo.textContent = item.metadata.titulo;
         titulo.className = 'titulo';
 
         const descricao = document.createElement('p');
-        descricao.textContent = item.conteudo;
+        descricao.textContent = item.metadata.conteudo;
         descricao.className = 'conteudoG';
 
         const link = document.createElement('a');
-        link.href = item.link;
+        link.href = item.metadata.link;
         link.textContent = 'Saiba mais';
         link.className = 'link';
 
@@ -476,7 +477,7 @@ fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/elementosCards')
     }
 
     //  função para renderizar os cartões
-    renderizarCartoesElementos(elementosCards);
+    renderizarCartoesElementos();
   })
   .catch((error) => {
     console.error('Erro durante a requisição:', error);
@@ -484,74 +485,57 @@ fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/elementosCards')
 
 
 
-
-  //solicitação fetch para CardCards'  (Segudno grupo de cards com rolagem horizontas (setas teclado))
+// Bloco 3: Recuperar e renderizar dados para cardCards
 fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/cardCards')
-.then((resp) => resp.json())
-.then((data) => {
-  const CardCards = data.CardCards; 
-  function renderizarCardCards() {
-    const containerCardCards = document.getElementById('CardCards'); 
-     //evento de click , setando setas do teclado, para manipular movimento de cards
-    containerCardCards.setAttribute('tabindex', '0');
-    containerCardCards.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowLeft') {
-        containerCardCards.scrollLeft -= 50; 
-      } else if (event.key === 'ArrowRight') {
-        containerCardCards.scrollLeft += 50; // 
-      }
-    });
+  .then((resp) => resp.json())
+  .then((data) => {
+    console.log('Dados recebidos:', data); // Verifique os dados recebidos
+    const cardCards = data.cardCards;
 
-    data.forEach((item) => {
+    function renderizarCardCards() {
+      const containerCardCards = document.getElementById('CardCards');
 
-      const cartao = document.createElement('div');
-      cartao.className = 'cartao';
+      data.forEach((item) => {
+        const cartao = document.createElement('div');
+        cartao.className = 'cartao';
 
-      const imagem = document.createElement('img');
-      imagem.src = item.img; 
-      imagem.className = 'img';
-   
+        const imagem = document.createElement('img');
+        imagem.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/cardCards/${item.filename}`;
+        imagem.alt = item.filename;
+        imagem.className = 'img';
 
-      const sub = document.createElement('h5');
-      sub.textContent = item.sub;
-      sub.className = 'sub';
+        const titulo = document.createElement('h5');
+        titulo.textContent = item.metadata.titulo;
+        titulo.className = 'sub';
 
-      const descricao = document.createElement('p');
-      descricao.textContent = item.conteudo;
-      descricao.className = 'conteudoG';
-      descricao.style.fontWeight = '500';
+        const descricao = document.createElement('p');
+        descricao.textContent = item.metadata.conteudo;
+        descricao.className = 'conteudoG';
+        descricao.style.fontWeight = '500';
 
-      const link = document.createElement('a');
-      link.href = item.link;
-      link.textContent = 'Ler artigo';
-      link.className = 'link';
+        const link = document.createElement('a');
+        link.href = item.metadata.link;
+        link.textContent = 'Ler artigo';
+        link.className = 'link';
 
-      
-      const icone = document.createElement('i');
-      icone.className = 'icone';
-      icone.innerHTML = '<i class="bi bi-arrow-up-right"></i>'; 
+        const icone = document.createElement('i');
+        icone.className = 'icone';
+        icone.innerHTML = '<i class="bi bi-arrow-up-right"></i>';
 
-      
-    
-    
-      cartao.appendChild(imagem);
-      cartao.appendChild(sub);
-      cartao.appendChild(descricao);
-      cartao.appendChild(link);
-      cartao.appendChild(icone);
+        cartao.appendChild(imagem);
+        cartao.appendChild(titulo);
+        cartao.appendChild(descricao);
+        cartao.appendChild(link);
+        cartao.appendChild(icone);
 
-      containerCardCards.appendChild(cartao);
-    });
-  }
+        containerCardCards.appendChild(cartao);
+      });
+    }
 
-  //  função para renderizar os cartões
-  renderizarCardCards(CardCards);
-})
-.catch((error) => {
-  console.error('Erro durante a requisição:', error);
-});
-
-
-//Revisado e concluido 02/11/23
+    renderizarCardCards();
+  })
+  .catch((error) => {
+    console.error('Erro durante a requisição:', error);
+  });
 
 
