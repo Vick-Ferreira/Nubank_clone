@@ -1,3 +1,4 @@
+# Use a imagem base Node.js
 FROM node:14
 
 # Define o diretório de trabalho dentro do container
@@ -9,7 +10,7 @@ COPY package*.json ./
 # Instala as dependências do backend
 RUN npm install
 
-# Copia os diretórios Backend e Frontendd
+# Copia os diretórios Backend e Frontend
 COPY Backend ./Backend
 COPY Frontend ./Frontend
 
@@ -17,7 +18,7 @@ COPY Frontend ./Frontend
 RUN cd Backend && npm install
 RUN cd Frontend && npm install
 
-# Expõe a porta 3000 (se necessário)
+# Expõe a porta 8080
 EXPOSE 8080
 
 # Comando de inicialização

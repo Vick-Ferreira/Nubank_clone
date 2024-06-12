@@ -54,96 +54,68 @@ window.addEventListener("scroll", toggleScrollButton);
 
 
 
-// Solicitação fetch para carroselCards
 fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/carrosel')
-    .then((resp) => resp.json())
-    .then((data) => {
-        function renderizarCarrosselCards() {
-            const containerCarrosselCards = $('#carrosselCards'); 
-            data.forEach((item) => {
-                const card = document.createElement('div');
-                card.className = 'card';
-
-                // Criar elemento de imagem
-                const img = document.createElement('img');
-                img.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/carrosel/${item.filename}`; // URL para recuperar a imagem
-                img.alt = item.filename; // Usando o título como texto alternativo da imagem
-                img.className = 'iconeCarrosel';
-
-                const titulo = document.createElement('h5');
-                titulo.textContent = item.metadata.titulo;
-                titulo.className = 'titulo-min';
-
-                const descricao = document.createElement('p');
-                descricao.textContent = item.metadata.conteudo;
-                descricao.className = 'conteudo';
-
-                const link = document.createElement('a');
-                link.href = item.metadata.link;
-                link.textContent = 'Saiba mais';
-                link.className = 'link-min';
-
-                card.appendChild(img); // Adicionar a imagem ao cartão
-                card.appendChild(titulo);
-                card.appendChild(descricao);
-                card.appendChild(link);
-
-                // Adicionando cartão ao carrossel
-                containerCarrosselCards.append(card);
-            });
-
-            // Inicializando o Slick Carousel após adicionar os cartões
-            containerCarrosselCards.slick({
-                infinite: true, // carrossel infinito
-                slidesToShow: 3, // Número de cartões visíveis por padrão
-                prevArrow: '#slick-prev',
-                nextArrow: '#slick-next',
-                responsive: [ //condições para as medias
-                {
-                    breakpoint: 2600,
-                    settings: {
-                        slidesToShow: 5.5  // Número de slides a serem mostrados a partir de 1600
-                    }
-                },
-                {
-                    breakpoint: 1600,
-                    settings: {
-                        slidesToShow: 4.5
-                    }
-                },
-                {
-                    breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 2.8
-                    }
-                },
-                {
-                    breakpoint: 800,
-                    settings: {
-                        slidesToShow: 2.1
-                    }
-                },
-                {
-                    breakpoint: 600,// Quando a largura da tela for igual ou inferior 
-                    settings: {
-                        slidesToShow: 1.5
-                    }
-                },
-                {
-                    breakpoint: 400,// Quando a largura da tela for igual ou inferior a 
-                    settings: {
-                        slidesToShow: .8
-                    }
-                }
-                ]
-            });
+    .then((resp) => {
+        if (!resp.ok) {
+            throw new Error(`Erro HTTP! status: ${resp.status}`);
         }
-        //  função para renderizar os cartões
-        renderizarCarrosselCards();
+        return resp.json();
+    })
+    .then((data) => {
+        // Lógica para renderizar os dados
+        renderizarCarrosselCards(data);
     })
     .catch((error) => {
         console.error('Erro durante a requisição:', error);
     });
+
+function renderizarCarrosselCards(data) {
+    const containerCarrosselCards = $('#carrosselCards'); 
+    data.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const img = document.createElement('img');
+        img.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/carrosel/${item.filename}`; 
+        img.alt = item.filename;
+        img.className = 'iconeCarrosel';
+
+        const titulo = document.createElement('h5');
+        titulo.textContent = item.metadata.titulo;
+        titulo.className = 'titulo-min';
+
+        const descricao = document.createElement('p');
+        descricao.textContent = item.metadata.conteudo;
+        descricao.className = 'conteudo';
+
+        const link = document.createElement('a');
+        link.href = item.metadata.link;
+        link.textContent = 'Saiba mais';
+        link.className = 'link-min';
+
+        card.appendChild(img);
+        card.appendChild(titulo);
+        card.appendChild(descricao);
+        card.appendChild(link);
+
+        containerCarrosselCards.append(card);
+    });
+
+    containerCarrosselCards.slick({
+        infinite: true,
+        slidesToShow: 3,
+        prevArrow: '#slick-prev',
+        nextArrow: '#slick-next',
+        responsive: [
+            { breakpoint: 2600, settings: { slidesToShow: 5.5 } },
+            { breakpoint: 1600, settings: { slidesToShow: 4.5 } },
+            { breakpoint: 1200, settings: { slidesToShow: 2.8 } },
+            { breakpoint: 800, settings: { slidesToShow: 2.1 } },
+            { breakpoint: 600, settings: { slidesToShow: 1.5 } },
+            { breakpoint: 400, settings: { slidesToShow: 0.8 } }
+        ]
+    });
+}
 
 
 
