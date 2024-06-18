@@ -8,13 +8,13 @@ const router = express.Router();
 const imgStorage = multer.memoryStorage();
 const imgUpload = multer({ storage: imgStorage });
 
-router.post('/elementos', imgUpload.single('imagem'), elementosCards.createElementos);
+router.post('/', imgUpload.single('imagem'), elementosCards.createElementos);
 
 //retorno de todos os dados
-router.get('/elementos', elementosCards.listarElementos);
+router.get('/', elementosCards.listarElementos);
 
 //retorno de dados especificos img
-router.get('/elementos/:filename', elementosCards.getElementos);
+router.get('/:filename', elementosCards.getElementos);
 
 
 

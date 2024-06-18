@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "http-server -p 8080"
+    "start": "http-server -p 5000"
   },
   "author": "",
   "license": "ISC",

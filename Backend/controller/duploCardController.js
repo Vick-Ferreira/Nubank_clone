@@ -87,10 +87,13 @@ exports.getDuploCards = async (req, res) => {
 
         const downloadStream = bucket.openDownloadStreamByName(filename);
 
+          // Adiciona cabeçalhos apropriados para servir uma imagem
+          res.setHeader('Content-Type', 'image/png'); // Ajuste o tipo de conteúdo conforme necessário
+
         downloadStream.on('data', (chunk) => {
             res.write(chunk);
         });
-
+        
         downloadStream.on('error', (error) => {
             console.log('Erro ao baixar arquivo', error);
             res.status(400).json({ erro: 'Arquivo não encontrado' });

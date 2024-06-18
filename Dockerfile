@@ -14,9 +14,6 @@ RUN npm install
 COPY Backend ./Backend
 COPY Frontend ./Frontend
 
-# Define o diretório de trabalho para o Backend e instala suas dependências
-WORKDIR /usr/src/app/Backend
-RUN npm install
 
 # Define o diretório de trabalho de volta para o diretório raiz
 WORKDIR /usr/src/app

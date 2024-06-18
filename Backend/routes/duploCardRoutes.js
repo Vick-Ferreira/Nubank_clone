@@ -9,13 +9,13 @@ const imgStorage = multer.memoryStorage();
 const imgUpload = multer({ storage: imgStorage });
 
 // Rota para adicionar elementos de texto e uma imagem
-router.post('/duploCards', imgUpload.single('imagem'), duploCards.createDuploCards);
+router.post('/', imgUpload.single('imagem'), duploCards.createDuploCards);
 
 
 // Rota para retornar todos os dados
-router.get('/duploCards', duploCards.listarDuploCards);
+router.get('/', duploCards.listarDuploCards);
 
 // Rota para retornar dados específicos (imagem)
-router.get('/duploCards/:filename', duploCards.getDuploCards);
+router.get('/:filename', duploCards.getDuploCards);
 
 module.exports = router;

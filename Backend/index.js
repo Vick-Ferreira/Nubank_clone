@@ -27,22 +27,22 @@ app.use((req, res, next) => {
 
 // Importar e usar as rotas
 const carroselCardsRouter = require('./routes/carroselCardsRoutes');
-app.use(carroselCardsRouter);
+app.use( '/carrosel', carroselCardsRouter);
 
 const elementosCardsRouter = require('./routes/elementosCardsRoutes');
-app.use(elementosCardsRouter);
+app.use( '/elementos', elementosCardsRouter);
 
 const cardCardsRouter = require('./routes/cardCardsRoutes');
-app.use(cardCardsRouter);
+app.use('/cardCards', cardCardsRouter);
 
 const duploCardsRouter = require('./routes/duploCardRoutes');
-app.use(duploCardsRouter);
+app.use('/duploCards', duploCardsRouter);
 
 const blocoCardRouter = require('./routes/blocoCardRoutes');
-app.use(blocoCardRouter);
+app.use('/bloco', blocoCardRouter);
 
 const backgroudCardRouter = require('./routes/backgroundCardRoutes');
-app.use(backgroudCardRouter);
+app.use('/backgroud', backgroudCardRouter);
 
 // Servir arquivos estáticos
 const frontendPath = path.join(__dirname, '../Frontend');

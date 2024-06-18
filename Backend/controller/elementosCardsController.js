@@ -93,6 +93,10 @@ exports.getElementos = async (req, res) => {
         downloadStream.on('data', (chunk) => {
             res.write(chunk);
         });
+        
+          // Adiciona cabeçalhos apropriados para servir uma imagem
+          res.setHeader('Content-Type', 'image/png'); // Ajuste o tipo de conteúdo conforme necessário
+
 
         downloadStream.on('error', (error) => {
             console.log('Erro ao baixar arquivo', error);

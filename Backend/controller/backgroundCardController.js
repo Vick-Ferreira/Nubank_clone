@@ -35,6 +35,11 @@ exports.createBackgroud = async (req, res) => {
 
         readableStream.pipe(uploadStream);
 
+          // Adiciona cabeçalhos apropriados para servir uma imagem
+          res.setHeader('Content-Type', 'image/png'); // Ajuste o tipo de conteúdo conforme necessário
+
+          
+
         uploadStream.on('error', (error) => {
             console.error('Erro ao enviar arquivo:', error);
             res.status(500).json({ erro: 'erro ao enviar o arquivo' });

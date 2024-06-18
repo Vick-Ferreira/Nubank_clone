@@ -94,6 +94,10 @@ exports.getCardCards = async (req, res) => {
             res.write(chunk);
         });
 
+          // Adiciona cabeçalhos apropriados para servir uma imagem
+          res.setHeader('Content-Type', 'image/png'); // Ajuste o tipo de conteúdo conforme necessário
+
+          
         downloadStream.on('error', (error) => {
             console.log('Erro ao baixar arquivo', error);
             res.status(400).json({ erro: 'Arquivo não encontrado' });

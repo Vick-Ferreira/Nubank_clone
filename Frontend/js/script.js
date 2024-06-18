@@ -144,7 +144,7 @@ fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/duploCards')
         }
 
         const imgDu = document.createElement('img');
-        imgDu.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/duploCards/${item.filename}`; // URL para recuperar a imagem
+        imgDu.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/duploCards/${item.filename}`;  // URL para recuperar a imagem
         imgDu.alt = item.filename;
         imgDu.className = 'imgDu';
 
