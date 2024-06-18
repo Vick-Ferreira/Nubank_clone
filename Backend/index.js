@@ -18,6 +18,13 @@ console.log('MONGODB_URI:', process.env.MONGODB_URI);
 app.use(express.json());
 app.use(cors());
 
+
+// Log de requisição para verificar chamadas
+app.use((req, res, next) => {
+    console.log(`Recebida requisição: ${req.method} ${req.url}`);
+    next();
+});
+
 // Importar e usar as rotas
 const carroselCardsRouter = require('./routes/carroselCardsRoutes');
 app.use(carroselCardsRouter);

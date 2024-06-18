@@ -116,14 +116,14 @@ function renderizarCarrosselCards(data) {
         ]
     });
 }
-  
+
 
 
 
 
 
 //solicitação fetch para dupla de cards
-fetch('http://localhost:8080/duploCards')
+fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/duploCards')
   .then((resp) => resp.json())
   .then((data) => {
     function renderizarDuplaCard() {
@@ -144,7 +144,7 @@ fetch('http://localhost:8080/duploCards')
         }
 
         const imgDu = document.createElement('img');
-        imgDu.src = `http://localhost:8080/duploCards/${item.filename}`; // URL para recuperar a imagem
+        imgDu.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/duploCards/${item.filename}`; // URL para recuperar a imagem
         imgDu.alt = item.filename;
         imgDu.className = 'imgDu';
 
@@ -213,7 +213,7 @@ fetch('http://localhost:8080/duploCards')
 
 
   //solicitação fetch para backgroud
-  fetch('http://localhost:8080/backgroud')
+  fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/backgroud')
   .then((resp) => resp.json())
   .then((data) => {
     console.log('Dados recebidos:', data); // Verifique os dados recebidos
@@ -255,7 +255,7 @@ fetch('http://localhost:8080/duploCards')
         }
 
         const imgBg = document.createElement('img');
-        imgBg.src = `http://localhost:8080/backgroud/${item.filename}`;
+        imgBg.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/backgroud/${item.filename}`;
         imgBg.alt = item.filename;
 
         if (index === 1 || index === 2) {
@@ -347,7 +347,7 @@ fetch('http://localhost:8080/duploCards')
 
 
  
-  fetch('http://localhost:8080/bloco')
+  fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/bloco')
   .then((resp) => resp.json())
   .then((data) => {
     function renderizarUnico() {
@@ -359,7 +359,7 @@ fetch('http://localhost:8080/duploCards')
         unicoCar.className = 'carUnico';
 
         const imgDu = document.createElement('img');
-        imgDu.src = `http://localhost:8080/bloco/${item.filename}`; // URL para recuperar a imagem
+        imgDu.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/bloco/${item.filename}`; // URL para recuperar a imagem
         imgDu.alt = item.filename;
 
         const subtituloUnico = document.createElement('h3');
@@ -394,7 +394,7 @@ fetch('http://localhost:8080/duploCards')
 
 
 
-  fetch('http://localhost:8080/elementos')
+  fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/elementos')
   .then((resp) => resp.json())
   .then((data) => {
     const elementosCards = data.elementosCards;
@@ -417,7 +417,7 @@ fetch('http://localhost:8080/duploCards')
         cartao.className = 'cartao';
 
         const imagem = document.createElement('img');
-        imagem.src = `http://localhost:8080/elementos/${item.filename}`; // URL para recuperar a imagem
+        imagem.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/elementos/${item.filename}`; // URL para recuperar a imagem
         imagem.alt = item.filename;
         imagem.className = 'img';
 
@@ -458,7 +458,7 @@ fetch('http://localhost:8080/duploCards')
 
 
 // Bloco 3: Recuperar e renderizar dados para cardCards
-fetch('http://localhost:8080/cardCards')
+fetch('https://nubank-clone-l7ltjozo2a-uw.a.run.app/cardCards')
   .then((resp) => resp.json())
   .then((data) => {
     console.log('Dados recebidos:', data); // Verifique os dados recebidos
@@ -472,7 +472,7 @@ fetch('http://localhost:8080/cardCards')
         cartao.className = 'cartao';
 
         const imagem = document.createElement('img');
-        imagem.src = `http://localhost:8080/cardCards/${item.filename}`;
+        imagem.src = `https://nubank-clone-l7ltjozo2a-uw.a.run.app/cardCards/${item.filename}`;
         imagem.alt = item.filename;
         imagem.className = 'img';
 
